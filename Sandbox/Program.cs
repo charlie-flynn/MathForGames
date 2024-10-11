@@ -1,6 +1,6 @@
 ﻿using MathLibrary;
 using Raylib_cs;
-using System.Numerics;
+// using System.Numerics;
 
 namespace Sandbox
 {
@@ -8,9 +8,6 @@ namespace Sandbox
     {
         static void Main(string[] args)
         {
-            Class1 Aa = new Class1();
-            Aa.Test();
-
             Raylib.InitWindow(800, 480, "Sans gets put down");
             Font comicSans = Raylib.LoadFont("comic.ttf");
             Font brushCursive = Raylib.LoadFont("BRUSHSCI.TTF");
