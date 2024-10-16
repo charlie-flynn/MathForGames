@@ -53,6 +53,11 @@ namespace MathLibrary
             return (other - this).Magnitude;
         }
 
+        public float Angle(Vector2 other)
+        {
+            return (float)Math.Acos(other.DotProduct(this));
+        }
+
         // operator override for equal sign
         public static bool operator ==(Vector2 left, Vector2 right)
         {

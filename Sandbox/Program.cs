@@ -24,7 +24,10 @@ namespace Sandbox
             float enemyRadius = 30;
             Color enemyColor = Color.Red;
 
+            Vector3 testVector = new Vector3(20, 5, 77);
+            Vector3 otherTestVector = new Vector3(1, 426, 0);
 
+            Console.WriteLine(testVector.CrossProduct(otherTestVector).ToString());
 
             while (!Raylib.WindowShouldClose())
             {
@@ -37,12 +40,10 @@ namespace Sandbox
 
                 playerPosition += movementInput * playerSpeed * Raylib.GetFrameTime();
 
-                Console.WriteLine(movementInput.ToString());
-
                 // calculate LOS
                 float distance = enemyPosition.Distance(playerPosition);
                 Vector2 playerToEnemyDirection = (playerPosition - enemyPosition).Normalized;
-                float angleToEnemy = (float)Math.Abs(Math.Acos(playerToEnemyDirection.DotProduct(playerForward)));
+                float angleToEnemy = (float)Math.Abs(playerToEnemyDirection.Angle(playerForward));
 
                 // if enemy is in line of sight
                 if (angleToEnemy < (playerViewAngle / 2) * (Math.PI / 180) && distance <= playerViewDistance)
@@ -53,7 +54,6 @@ namespace Sandbox
                 {
                     enemyColor = Color.Red;
                 }
-
 
                 // DRAW
                 Raylib.BeginDrawing();
