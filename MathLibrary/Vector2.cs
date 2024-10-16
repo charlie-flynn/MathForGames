@@ -48,6 +48,11 @@ namespace MathLibrary
             return (x * other.x) + (y * other.y);
         }
 
+        public float Distance(Vector2 other)
+        {
+            return (other - this).Magnitude;
+        }
+
         // operator override for equal sign
         public static bool operator ==(Vector2 left, Vector2 right)
         {
