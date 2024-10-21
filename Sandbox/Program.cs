@@ -37,7 +37,7 @@ namespace Sandbox
                 6, 1, 23,
                 2, 7, 2);
 
-            testMatrix3 -= otherTestMatrix3;
+            testMatrix3 *= otherTestMatrix3;
 
             Console.WriteLine(testMatrix3.ToString());
 

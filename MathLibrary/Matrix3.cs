@@ -112,6 +112,9 @@ namespace MathLibrary
         }
 
         // override for multiplication that i really like how i did Σ:3c
+        // basically it gets the row and column of the index it has,
+        // then it uses that info and a little bit of math to find the indices of all of the numbers in the necessary row of matrix a
+        // and all of the numbers in the necessary column of matrix b!
         public static Matrix3 operator *(Matrix3 a, Matrix3 b)
         {
             Matrix3 result = new Matrix3();
@@ -120,7 +123,6 @@ namespace MathLibrary
             {
                 byte row = (byte)(i / 3);
                 byte column = (byte)(i % 3);
-
 
                 result[i] =
                     (a[row * 3] * b[column]) +
