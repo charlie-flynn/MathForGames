@@ -89,7 +89,7 @@ namespace MathLibrary
         // operator override for subtraction
         public static Vector3 operator -(Vector3 left, Vector3 right)
         {
-            return new Vector3(left.x - right.x, left.y - right.y, left.z + right.z);
+            return new Vector3(left.x - right.x, left.y - right.y, left.z - right.z);
         }
 
         // operator override for multiplication by a scalar
@@ -132,7 +132,7 @@ namespace MathLibrary
         // ^^^ that but the other way around
         public static implicit operator System.Numerics.Vector3(Vector3 vector)
         {
-            return new System.Numerics.Vector3((float)vector.x, (float)vector.y, (float)vector.z);
+            return new System.Numerics.Vector3(vector.x, vector.y, vector.z);
         }
     }
 }
