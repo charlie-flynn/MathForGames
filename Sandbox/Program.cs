@@ -7,7 +7,7 @@ namespace Sandbox
     {
         static void Main(string[] args)
         {
-            Raylib.InitWindow(800, 480, "MY COOL MATH :3");
+            Raylib.InitWindow(800, 800, "MY COOL MATH :3");
             
             Vector2 screenDimensions = new Vector2(Raylib.GetScreenWidth(), Raylib.GetScreenHeight());
 
@@ -39,7 +39,29 @@ namespace Sandbox
 
             testMatrix3 *= otherTestMatrix3;
 
+            Console.WriteLine();
+
             Console.WriteLine(testMatrix3.ToString());
+
+            Console.WriteLine();
+
+            Matrix4 testMatrix4 = new Matrix4(
+                1, 32, 5, 2,
+                20, 0, 7, 4,
+                1, 1, 1, 8,
+                250, 32, 64, 1);
+
+            Matrix4 otherTestMatrix4 = new Matrix4(
+                5, 2, 4, 88,
+                6, 1, 23, 2,
+                2, 7, 2, 40,
+                1, 1, 1, 1);
+
+            testMatrix4 *= otherTestMatrix4;
+
+            Console.WriteLine(testMatrix4.ToString());
+
+            Console.WriteLine();
 
             Console.WriteLine(testVector.CrossProduct(otherTestVector).ToString());
 

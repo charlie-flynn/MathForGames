@@ -44,7 +44,7 @@ namespace MathLibrary
             }
         }
 
-        // override for pretending that this is an array
+        // override for pretending that this is an array with indices
         public float this[int i]
         {
             get
@@ -115,6 +115,7 @@ namespace MathLibrary
         // basically it gets the row and column of the index it has,
         // then it uses that info and a little bit of math to find the indices of all of the numbers in the necessary row of matrix a
         // and all of the numbers in the necessary column of matrix b!
+        // and it does that for every single number in a matrix3
         public static Matrix3 operator *(Matrix3 a, Matrix3 b)
         {
             Matrix3 result = new Matrix3();
