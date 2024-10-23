@@ -32,7 +32,7 @@ namespace MathLibrary
             this.m22 = m22;
         }
 
-        public static Matrix3 Indentity
+        public static Matrix3 Identity
         {
             get
             {

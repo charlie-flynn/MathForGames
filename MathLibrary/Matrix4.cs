@@ -40,7 +40,7 @@ namespace MathLibrary
             this.m33 = m33;
         }
 
-        public static Matrix4 Indentity
+        public static Matrix4 Identity
         {
             get
             {
@@ -139,7 +139,7 @@ namespace MathLibrary
         // basically it gets the row and column of the index it has,
         // then it uses that info and a little bit of math to find the indices of all of the numbers in the necessary row of matrix a
         // and all of the numbers in the necessary column of matrix b!
-        // and it does that for every single number in a Matrix4
+        // and it does that for every single number in a matrix4
         public static Matrix4 operator *(Matrix4 a, Matrix4 b)
         {
             Matrix4 result = new Matrix4();
