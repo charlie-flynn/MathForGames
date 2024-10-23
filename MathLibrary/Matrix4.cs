@@ -116,15 +116,27 @@ namespace MathLibrary
 
         public static Matrix4 CreateRotationX(float radians)
         {
-            return Identity;
+            return new Matrix4(
+                1, 0, 0, 0,
+                0, (float)Math.Cos(radians), -(float)Math.Sin(radians), 0,
+                0, (float)Math.Sin(radians), (float)Math.Cos(radians), 0,
+                0, 0, 0, 1);
         }
         public static Matrix4 CreateRotationY(float radians)
         {
-            return Identity;
+            return new Matrix4(
+                (float)Math.Cos(radians), 0, (float)Math.Sin(radians), 0,
+                0, 1, 0, 0,
+                -(float)Math.Sin(radians), 0, (float)Math.Cos(radians), 0,
+                0, 0, 0, 1);
         }
         public static Matrix4 CreateRotationZ(float radians)
         {
-            return Identity;
+            return new Matrix4(
+                (float)Math.Cos(radians), -(float)Math.Sin(radians), 0, 0,
+                (float)Math.Sin(radians), (float)Math.Cos(radians), 0, 0,
+                0, 0, 1, 0,
+                0, 0, 0, 1);
         }
 
         // override for addition
