@@ -157,5 +157,10 @@ namespace MathLibrary
 
             return result;
         }
+
+        public static Matrix3 operator *(Matrix3 left, Vector3 right)
+        {
+            return Identity;
+        }
     }
 }

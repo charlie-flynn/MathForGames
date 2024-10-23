@@ -101,6 +101,11 @@ namespace Sandbox
             return new Vector4(left.x * scalar, left.y * scalar, left.z * scalar, left.w * scalar);
         }
 
+        public static Vector4 operator *(float scalar, Vector4 right)
+        {
+            return new Vector4(scalar * right.x, scalar * right.y);
+        }
+
         // operator override for division in a polite manner (will not divide by zero)
         public static Vector4 operator /(Vector4 left, float scalar)
         {

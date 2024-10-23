@@ -113,6 +113,19 @@ namespace MathLibrary
                 this[12] + " " + this[13] + " " + this[14] + " " + this[15];
         }
 
+        public Matrix4 CreateRotationX(float radians)
+        {
+            return Identity;
+        }
+        public Matrix4 CreateRotationY(float radians)
+        {
+            return Identity;
+        }
+        public Matrix4 CreateRotationZ(float radians)
+        {
+            return Identity;
+        }
+
         // override for addition
         public static Matrix4 operator +(Matrix4 a, Matrix4 b)
         {
@@ -157,6 +170,11 @@ namespace MathLibrary
             }
 
             return result;
+        }
+
+        public static Matrix4 operator *(Matrix4 left, Vector4 right)
+        {
+            return Identity;
         }
     }
 }
