@@ -53,9 +53,18 @@ namespace MathLibrary
             return new Vector3((y * other.z) - (z * other.y), (z * other.x) - (x * other.z), (x * other.y) - (y * other.x));
         }
 
+        public static Vector3 CrossProduct(Vector3 a, Vector3 b)
+        {
+            return new Vector3((a.y * b.z) - (a.z * b.y), (a.z * b.x) - (a.x * b.z), (a.x * b.y) - (a.y * b.x));
+        }
+
         public float DotProduct(Vector3 other)
         {
             return (x * other.x) + (y * other.y) + (z * other.z);
+        }
+        public static float DotProduct(Vector3 a, Vector3 b)
+        {
+            return (a.x * b.x) + (a.y * b.y) + (a.z * b.z);
         }
 
         public float Distance(Vector3 other)

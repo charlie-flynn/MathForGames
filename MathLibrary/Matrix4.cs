@@ -114,6 +114,7 @@ namespace MathLibrary
                 this[12] + " " + this[13] + " " + this[14] + " " + this[15];
         }
 
+        // rotation functions
         public static Matrix4 CreateRotationX(float radians)
         {
             return new Matrix4(
@@ -185,6 +186,7 @@ namespace MathLibrary
             return result;
         }
 
+        // multiplication override to let you multiply a matrix4 with a vector
         public static Vector4 operator *(Matrix4 left, Vector4 right)
         {
             return left * new Matrix4(
@@ -194,6 +196,7 @@ namespace MathLibrary
                 0, 0, 0, right.w);
         }
 
+        // implicit conversion of a matrix4 to a matrix4
         public static implicit operator Vector4(Matrix4 matrix)
         {
             return new Vector4(matrix[3], matrix[7], matrix[11], matrix[15]);

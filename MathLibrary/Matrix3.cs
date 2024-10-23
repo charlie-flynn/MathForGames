@@ -89,6 +89,7 @@ namespace MathLibrary
                 this[6] + " " + this[7] + " " + this[8];
         }
 
+        // create a translation to help you move things
         public static Matrix3 CreateTranslation(float x, float y)
         {
             return new Matrix3(
@@ -97,6 +98,7 @@ namespace MathLibrary
                 0, 0, 1);
         }
 
+        // roatation
         public static Matrix3 CreateRotation(float radians)
         {
             return new Matrix3(
@@ -105,6 +107,7 @@ namespace MathLibrary
                 0, 0, 1);
         }
 
+        // scale
         public static Matrix3 CreateScale(float x, float y)
         {
             return new Matrix3(

@@ -43,16 +43,23 @@ namespace MathLibrary
             return "(" + x + ", " + y + ")";  
         }
 
+        // get the dot product of two vectors
         public float DotProduct(Vector2 other)
         {
             return (x * other.x) + (y * other.y);
         }
+        public static float DotProduct(Vector2 a, Vector2 b)
+        {
+            return (a.x * b.x) + (a.y * b.y);
+        }
 
+        // get the distance between two points
         public float Distance(Vector2 other)
         {
             return (other - this).Magnitude;
         }
 
+        // get the angle between two vectors
         public float Angle(Vector2 other)
         {
             return (float)Math.Acos(other.DotProduct(this));

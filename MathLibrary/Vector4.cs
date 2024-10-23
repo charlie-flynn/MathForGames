@@ -56,11 +56,20 @@ namespace MathLibrary
             return new Vector4((y * other.z) - (z * other.y), (z * other.x) - (x * other.z), (x * other.y) - (y * other.x), 0);
         }
 
+        public static Vector4 CrossProduct(Vector4 a, Vector4 b)
+        {
+            return new Vector4((a.y * b.z) - (a.z * b.y), (a.z * b.x) - (a.x * b.z), (a.x * b.y) - (a.y * b.x), 0);
+        }
+
         public float DotProduct(Vector4 other)
         {
             return (x * other.x) + (y * other.y) + (z * other.z) + (w * other.w);
         }
 
+        public static float DotProduct(Vector4 a, Vector4 b)
+        {
+            return (a.x * b.x) + (a.y * b.y) + (a.z * b.z) + (a.w * b.w);
+        }
         public float Distance(Vector4 other)
         {
             return (other - this).Magnitude;
