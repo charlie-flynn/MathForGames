@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sandbox
+namespace MathLibrary
 {
     public struct Vector4
     {
-        float x, y, z, w;
+        public float x, y, z, w;
 
         public float Magnitude
         {
@@ -103,7 +103,7 @@ namespace Sandbox
 
         public static Vector4 operator *(float scalar, Vector4 right)
         {
-            return new Vector4(scalar * right.x, scalar * right.y);
+            return right * scalar;
         }
 
         // operator override for division in a polite manner (will not divide by zero)

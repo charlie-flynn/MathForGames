@@ -8,7 +8,7 @@ namespace MathLibrary
 {
     public struct Vector3
     {
-        float x, y, z;
+        public float x, y, z;
 
         public float Magnitude
         {
@@ -100,7 +100,7 @@ namespace MathLibrary
 
         public static Vector3 operator *(float scalar, Vector3 right)
         {
-            return new Vector3(scalar * right.x, scalar * right.y);
+            return right * scalar;
         }
 
         // operator override for division in a polite manner (will not divide by zero)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -113,15 +114,15 @@ namespace MathLibrary
                 this[12] + " " + this[13] + " " + this[14] + " " + this[15];
         }
 
-        public Matrix4 CreateRotationX(float radians)
+        public static Matrix4 CreateRotationX(float radians)
         {
             return Identity;
         }
-        public Matrix4 CreateRotationY(float radians)
+        public static Matrix4 CreateRotationY(float radians)
         {
             return Identity;
         }
-        public Matrix4 CreateRotationZ(float radians)
+        public static Matrix4 CreateRotationZ(float radians)
         {
             return Identity;
         }
@@ -172,9 +173,18 @@ namespace MathLibrary
             return result;
         }
 
-        public static Matrix4 operator *(Matrix4 left, Vector4 right)
+        public static Vector4 operator *(Matrix4 left, Vector4 right)
         {
-            return Identity;
+            return left * new Matrix4(
+                0, 0, 0, right.x,
+                0, 0, 0, right.y,
+                0, 0, 0, right.z,
+                0, 0, 0, right.w);
+        }
+
+        public static implicit operator Vector4(Matrix4 matrix)
+        {
+            return new Vector4(matrix[3], matrix[7], matrix[11], matrix[15]);
         }
     }
 }

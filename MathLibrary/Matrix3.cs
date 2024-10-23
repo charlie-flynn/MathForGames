@@ -158,9 +158,17 @@ namespace MathLibrary
             return result;
         }
 
-        public static Matrix3 operator *(Matrix3 left, Vector3 right)
+        public static Vector3 operator *(Matrix3 left, Vector3 right)
         {
-            return Identity;
+            return left * new Matrix3(
+                0, 0, right.x,
+                0, 0, right.y,
+                0, 0, right.z);
+        }
+
+        public static implicit operator Vector3(Matrix3 matrix)
+        {
+            return new Vector3(matrix[2], matrix[5], matrix[8]);
         }
     }
 }
