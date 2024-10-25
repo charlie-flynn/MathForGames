@@ -58,6 +58,7 @@ namespace MathLibrary
             return new Vector3((a.y * b.z) - (a.z * b.y), (a.z * b.x) - (a.x * b.z), (a.x * b.y) - (a.y * b.x));
         }
 
+        // get the dot product between two vectors
         public float DotProduct(Vector3 other)
         {
             return (x * other.x) + (y * other.y) + (z * other.z);
@@ -67,14 +68,24 @@ namespace MathLibrary
             return (a.x * b.x) + (a.y * b.y) + (a.z * b.z);
         }
 
+        // get the distance between two points
         public float Distance(Vector3 other)
         {
             return (other - this).Magnitude;
         }
+        public static float Distance(Vector3 a, Vector3 b)
+        {
+            return (a - b).Magnitude;
+        }
 
+        // get the angle of two vectors
         public float Angle(Vector3 other)
         {
             return (float)Math.Acos(other.DotProduct(this));
+        }
+        public static float Angle(Vector3 a, Vector3 b)
+        {
+            return (float)Math.Acos(DotProduct(a, b));
         }
 
         // operator override for equal sign

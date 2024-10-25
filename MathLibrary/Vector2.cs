@@ -58,11 +58,19 @@ namespace MathLibrary
         {
             return (other - this).Magnitude;
         }
+        public static float Distance(Vector2 a, Vector2 b)
+        {
+            return (a - b).Magnitude;
+        }
 
         // get the angle between two vectors
         public float Angle(Vector2 other)
         {
             return (float)Math.Acos(other.DotProduct(this));
+        }
+        public static float Angle(Vector2 a, Vector2 b)
+        {
+            return (float)Math.Acos(DotProduct(a, b));
         }
 
         // operator override for equal sign

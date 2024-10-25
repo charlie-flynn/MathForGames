@@ -98,7 +98,7 @@ namespace MathLibrary
                 0, 0, 1);
         }
 
-        // roatation
+        // roatation to roatation things
         public static Matrix3 CreateRotation(float radians)
         {
             return new Matrix3(
@@ -107,7 +107,7 @@ namespace MathLibrary
                 0, 0, 1);
         }
 
-        // scale
+        // create a scale type of matrix
         public static Matrix3 CreateScale(float x, float y)
         {
             return new Matrix3(
@@ -171,7 +171,7 @@ namespace MathLibrary
 
         public static implicit operator Vector3(Matrix3 matrix)
         {
-            return new Vector3(matrix[2], matrix[5], matrix[8]);
+            return new Vector3(matrix.m02, matrix.m12, matrix.m22);
         }
     }
 }

@@ -199,7 +199,7 @@ namespace MathLibrary
         // implicit conversion of a matrix4 to a matrix4
         public static implicit operator Vector4(Matrix4 matrix)
         {
-            return new Vector4(matrix[3], matrix[7], matrix[11], matrix[15]);
+            return new Vector4(matrix.m03, matrix.m13, matrix.m23, matrix.m33);
         }
     }
 }
