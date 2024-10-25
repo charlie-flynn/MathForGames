@@ -32,11 +32,11 @@ namespace MathLibrary
             this.m22 = m22;
         }
 
+        // identity matrix
         public static Matrix3 Identity
         {
             get
             {
-                // return identity matrix
                 return new Matrix3(
                     1, 0, 0,
                     0, 1, 0,
@@ -44,7 +44,7 @@ namespace MathLibrary
             }
         }
 
-        // override for pretending that this is an array with indices
+        // override for pretending that this is an array with indices (beacuz it's awesome)
         public float this[int i]
         {
             get
@@ -161,6 +161,7 @@ namespace MathLibrary
             return result;
         }
 
+        // override for multiplying a matrix by a vector
         public static Vector3 operator *(Matrix3 left, Vector3 right)
         {
             return left * new Matrix3(
@@ -169,6 +170,7 @@ namespace MathLibrary
                 0, 0, right.z);
         }
 
+        // conversion from matrix to vector
         public static implicit operator Vector3(Matrix3 matrix)
         {
             return new Vector3(matrix.m02, matrix.m12, matrix.m22);
