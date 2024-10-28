@@ -29,11 +29,11 @@ namespace Sandbox
 
             set
             {
-                // set the _localrotation
+                // set the rotation and rotation angle, then update the transforms
                 _localRotation = value;
-
-                // set _localRotationAngle
                 _localRotationAngle = (float)Math.Atan2(_localRotation.m01, _localRotation.m00);
+
+                UpdateTransforms();
             }
         }
 
@@ -45,6 +45,8 @@ namespace Sandbox
             {
                 _localTranslation.m02 = value.x;
                 _localTranslation.m12 = value.y;
+
+                UpdateTransforms();
             }
         }
 
@@ -61,6 +63,8 @@ namespace Sandbox
             {
                 _localScale.m00 = value.x;
                 _localScale.m11 = value.y;
+
+                UpdateTransforms();
             }
         }
 
@@ -120,17 +124,64 @@ namespace Sandbox
 
         public void AddChild(Transform2D child)
         {
+            Transform2D[] tempArray = new Transform2D[_children.Length + 1];
 
+            for (int i = 0; i < _children.Length; i++)
+            {
+                tempArray[i] = _children[i];
+            }
+
+            tempArray[tempArray.Length - 1] = child;
+
+            _children = tempArray;
+
+            child._parent = this;
         }
 
         public void RemoveChild(Transform2D child)
         {
+            Transform2D[] tempArray = new Transform2D[_children.Length - 1];
+            int counter = 0;
 
+            for (int i = 0; i < _children.Length; i++)
+            {
+                if (_children[i] != child)
+                {
+                    tempArray[counter] = _children[i];
+                    counter++;
+                }
+            }
+
+            child._parent = null;
+
+            _children = tempArray;
         }
 
-        public void UpdateTransform()
+        public void WriteChildren()
         {
+            foreach (Transform2D child in _children)
+            {
+                Console.WriteLine(child);
+            }
+        }
 
+        public void UpdateTransforms()
+        {
+            _localMatrix = _localTranslation * _localRotation * _localScale;
+
+            if (_parent != null)
+            {
+                _globalMatrix = _parent._globalMatrix * _localMatrix;
+            }
+            else
+            {
+                _globalMatrix = _localMatrix;
+            }
+
+            foreach (Transform2D child in _children)
+            {
+                child.UpdateTransforms();
+            }
         }
     }
 }

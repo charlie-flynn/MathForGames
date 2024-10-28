@@ -25,45 +25,24 @@ namespace Sandbox
             Color enemyColor = Color.Red;
 
             // buncha test stuff
-            Vector3 testVector = new Vector3(20, 5, 77);
-            Vector3 otherTestVector = new Vector3(1, 426, 0);
-            Matrix3 testMatrix3 = new Matrix3(
-                1, 32, 5,
-                20, 0, 7,
-                1, 1, 1);
+            Actor testActor = new Actor();
+            Actor coolerTestActor = new Actor();
+            Transform2D testform = new Transform2D(null);
+            Transform2D otherTestform = new Transform2D(testActor);
+            Transform2D otherOtherTestform = new Transform2D(coolerTestActor);
 
-            Matrix3 otherTestMatrix3 = new Matrix3(
-                5, 2, 4,
-                6, 1, 23,
-                2, 7, 2);
+            otherTestform.Translate(1, 400);
 
-            testMatrix3 *= otherTestMatrix3;
+            testform.AddChild(otherTestform);
+            testform.AddChild(otherOtherTestform);
 
+            testform.WriteChildren();
             Console.WriteLine();
 
-            Console.WriteLine(testMatrix3.ToString());
+            testform.RemoveChild(otherTestform);
 
-            Console.WriteLine();
+            testform.WriteChildren();
 
-            Matrix4 testMatrix4 = new Matrix4(
-                1, 32, 5, 2,
-                20, 0, 7, 4,
-                1, 1, 1, 8,
-                250, 32, 64, 1);
-
-            Matrix4 otherTestMatrix4 = new Matrix4(
-                5, 2, 4, 88,
-                6, 1, 23, 2,
-                2, 7, 2, 40,
-                1, 1, 1, 1);
-
-            testMatrix4 *= otherTestMatrix4;
-
-            Console.WriteLine(testMatrix4.ToString());
-
-            Console.WriteLine();
-
-            Console.WriteLine(testVector.CrossProduct(otherTestVector).ToString());
 
             while (!Raylib.WindowShouldClose())
             {
