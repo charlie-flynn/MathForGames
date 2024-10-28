@@ -80,7 +80,7 @@ namespace MathLibrary
                 }
             }
         }
-
+        
         // convert the matrix3 into a string
         public override string ToString()
         {
