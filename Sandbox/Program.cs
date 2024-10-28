@@ -23,9 +23,16 @@ namespace Sandbox
             Vector2 offset = new Vector2(t1.LocalScale.x / 2, t1.LocalScale.y / 2);
             float moveSpeed = 200.0f;
             float rotateSpeed = 5.0f;
-            
 
-            
+            Transform2D t2 = new Transform2D(a);
+            t2.LocalScale = new Vector2(50, 50);
+            t2.LocalPosition = new Vector2
+                ((Raylib.GetScreenWidth() / 2) - (t2.LocalScale.x / 2),
+                (Raylib.GetScreenHeight()) / 2 - (t2.LocalScale.y / 2));
+
+            t1.AddChild(t2);
+
+
 
             while (!Raylib.WindowShouldClose())
             {
@@ -35,7 +42,11 @@ namespace Sandbox
                 t1.Translate(t1.Forward * (Raylib.IsKeyDown(KeyboardKey.W) - Raylib.IsKeyDown(KeyboardKey.S)) * moveSpeed * Raylib.GetFrameTime());
                 t1.Rotate((Raylib.IsKeyDown(KeyboardKey.D) - (Raylib.IsKeyDown(KeyboardKey.A) * 2)) * rotateSpeed * Raylib.GetFrameTime());
 
-                Raylib.DrawRectangleV(t1.GlobalPosition, t1.GlobalScale, Color.Pink);
+                Rectangle rect = new Rectangle(t1.GlobalPosition + offset, t1.GlobalScale);
+                Rectangle rect2 = new Rectangle(t2.GlobalPosition + offset, t2.GlobalScale);
+
+                Raylib.DrawRectanglePro(rect, new Vector2(0, 0) + offset, -t1.GlobalRotationAngle * (180 / (float)Math.PI), Color.Pink);
+                Raylib.DrawRectanglePro(rect2, new Vector2(0, 0) + offset, -t1.GlobalRotationAngle * (180 / (float)Math.PI), Color.SkyBlue);
                 Raylib.DrawLineV(t1.GlobalPosition + offset, t1.GlobalPosition + offset + (t1.Forward * 100), Color.SkyBlue);
                 Raylib.EndDrawing();
             }
