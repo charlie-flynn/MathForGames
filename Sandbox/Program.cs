@@ -7,6 +7,42 @@ namespace Sandbox
     {
         static void Main(string[] args)
         {
+
+            // buncha test stuff
+            Actor a = new Actor();
+
+            Raylib.InitWindow(800, 480, "world");
+            Raylib.SetTargetFPS(60);
+
+            Transform2D t1 = new Transform2D(a);
+            t1.LocalScale = new Vector2(100, 100);
+            t1.LocalPosition = new Vector2
+                ((Raylib.GetScreenWidth() / 2) - (t1.LocalScale.x / 2), 
+                (Raylib.GetScreenHeight()) / 2 - (t1.LocalScale.y / 2));
+
+            Vector2 offset = new Vector2(t1.LocalScale.x / 2, t1.LocalScale.y / 2);
+            float moveSpeed = 200.0f;
+            float rotateSpeed = 5.0f;
+            
+
+            
+
+            while (!Raylib.WindowShouldClose())
+            {
+                Raylib.BeginDrawing();
+                Raylib.ClearBackground(Color.White);
+
+                t1.Translate(t1.Forward * (Raylib.IsKeyDown(KeyboardKey.W) - Raylib.IsKeyDown(KeyboardKey.S)) * moveSpeed * Raylib.GetFrameTime());
+                t1.Rotate((Raylib.IsKeyDown(KeyboardKey.D) - (Raylib.IsKeyDown(KeyboardKey.A) * 2)) * rotateSpeed * Raylib.GetFrameTime());
+
+                Raylib.DrawRectangleV(t1.GlobalPosition, t1.GlobalScale, Color.Pink);
+                Raylib.DrawLineV(t1.GlobalPosition + offset, t1.GlobalPosition + offset + (t1.Forward * 100), Color.SkyBlue);
+                Raylib.EndDrawing();
+            }
+
+
+
+            #region OLD CODE
             Raylib.InitWindow(800, 800, "MY COOL MATH :3");
             
             Vector2 screenDimensions = new Vector2(Raylib.GetScreenWidth(), Raylib.GetScreenHeight());
@@ -24,73 +60,57 @@ namespace Sandbox
             float enemyRadius = 30;
             Color enemyColor = Color.Red;
 
-            // buncha test stuff
-            Actor testActor = new Actor();
-            Actor coolerTestActor = new Actor();
-            Transform2D testform = new Transform2D(null);
-            Transform2D otherTestform = new Transform2D(testActor);
-            Transform2D otherOtherTestform = new Transform2D(coolerTestActor);
-
-            otherTestform.Translate(1, 400);
-
-            testform.AddChild(otherTestform);
-            testform.AddChild(otherOtherTestform);
-
-            testform.WriteChildren();
-            Console.WriteLine();
-
-            testform.RemoveChild(otherTestform);
-
-            testform.WriteChildren();
 
 
-            while (!Raylib.WindowShouldClose())
-            {
-                // UPDATE
 
-                //moved ment
-                Vector2 movementInput = new Vector2
-                    (Raylib.IsKeyDown(KeyboardKey.D) - Raylib.IsKeyDown(KeyboardKey.A), 
-                    Raylib.IsKeyDown(KeyboardKey.S) - Raylib.IsKeyDown(KeyboardKey.W)).Normalized;
+            //while (!raylib.windowshouldclose())
+            //{
+            //    // update
 
-                playerPosition += movementInput * playerSpeed * Raylib.GetFrameTime();
+            //    //moved ment
+            //    vector2 movementinput = new vector2
+            //        (raylib.iskeydown(keyboardkey.d) - raylib.iskeydown(keyboardkey.a), 
+            //        raylib.iskeydown(keyboardkey.s) - raylib.iskeydown(keyboardkey.w)).normalized;
 
-                // calculate line of sight
-                float distance = enemyPosition.Distance(playerPosition);
-                Vector2 playerToEnemyDirection = (playerPosition - enemyPosition).Normalized;
-                float angleToEnemy = (float)Math.Abs(playerToEnemyDirection.Angle(playerForward));
+            //    playerposition += movementinput * playerspeed * raylib.getframetime();
 
-                // if enemy is in line of sight
-                if (angleToEnemy < (playerViewAngle / 2) * (Math.PI / 180) && distance <= playerViewDistance)
-                {
-                    enemyColor = Color.Purple;
-                }
-                else
-                {
-                    enemyColor = Color.Red;
-                }
+            //    // calculate line of sight
+            //    float distance = enemyposition.distance(playerposition);
+            //    vector2 playertoenemydirection = (playerposition - enemyposition).normalized;
+            //    float angletoenemy = (float)math.abs(playertoenemydirection.angle(playerforward));
 
-                // DRAW
-                Raylib.BeginDrawing();
-                Raylib.ClearBackground(Color.White);
+            //    // if enemy is in line of sight
+            //    if (angletoenemy < (playerviewangle / 2) * (math.pi / 180) && distance <= playerviewdistance)
+            //    {
+            //        enemycolor = color.purple;
+            //    }
+            //    else
+            //    {
+            //        enemycolor = color.red;
+            //    }
 
-                // draw enemy
-                Raylib.DrawCircleV(enemyPosition, enemyRadius, enemyColor);
+            //    // draw
+            //    raylib.begindrawing();
+            //    raylib.clearbackground(color.white);
 
-                // draw player
-                Raylib.DrawCircleV(playerPosition, playerRadius, Color.Green);
+            //    // draw enemy
+            //    raylib.drawcirclev(enemyposition, enemyradius, enemycolor);
 
-                // draw player forward
-                Raylib.DrawLineV(playerPosition, playerPosition - (playerForward * 100), Color.Orange);
+            //    // draw player
+            //    raylib.drawcirclev(playerposition, playerradius, color.green);
 
-                Raylib.DrawCircleSectorLines(playerPosition, playerViewDistance, (-90 - (playerViewAngle / 2)), - 90 + (playerViewAngle / 2), 10, Color.Orange);
+            //    // draw player forward
+            //    raylib.drawlinev(playerposition, playerposition - (playerforward * 100), color.orange);
 
-                Raylib.EndDrawing();
-            }
+            //    raylib.drawcirclesectorlines(playerposition, playerviewdistance, (-90 - (playerviewangle / 2)), - 90 + (playerviewangle / 2), 10, color.orange);
 
-            Raylib.CloseWindow();
+            //    raylib.enddrawing();
+            //}
+
+            //raylib.closewindow();
+            #endregion
         }
 
-        
+
     }
 }

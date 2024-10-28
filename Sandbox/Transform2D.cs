@@ -29,9 +29,10 @@ namespace Sandbox
 
             set
             {
-                // set the rotation and rotation angle, then update the transforms
+                // comment just in case
                 _localRotation = value;
-                _localRotationAngle = (float)Math.Atan2(_localRotation.m01, _localRotation.m00);
+                // other comment just in case
+                _localRotationAngle = -(float)Math.Atan2(_localRotation.m01, _localRotation.m00);
 
                 UpdateTransforms();
             }
@@ -86,12 +87,12 @@ namespace Sandbox
 
         public Vector2 Forward
         {
-            get { return new Vector2(_globalMatrix.m00, _globalMatrix.m10); }
+            get { return new Vector2(_globalMatrix.m00, _globalMatrix.m10).Normalized; }
         }
 
         public Vector2 Right
         {
-            get { return new Vector2(_globalMatrix.m10, _globalMatrix.m11); }
+            get { return new Vector2(_globalMatrix.m10, _globalMatrix.m11).Normalized; }
         }
 
         public float LocalRotationAngle
@@ -104,7 +105,8 @@ namespace Sandbox
             get { return (float)Math.Atan2(_globalMatrix.m01, _globalMatrix.m00); }
         }
 
-        // waogh thats a lotta variables !
+        // waogh thats a lotta variables up there !  good thing theres no more code !
+        // hahaha. just kiddin. more code
 
         public Transform2D(Actor owner)
         {
@@ -122,8 +124,19 @@ namespace Sandbox
             LocalPosition += new Vector2(x, y);
         }
 
+        public void Rotate(float radians)
+        {
+            LocalRotation = Matrix3.CreateRotation(_localRotationAngle + radians);
+        }
+
         public void AddChild(Transform2D child)
         {
+            // do not add the child if it is this transform's parent
+            if (child == _parent)
+            {
+                return;
+            }
+
             Transform2D[] tempArray = new Transform2D[_children.Length + 1];
 
             for (int i = 0; i < _children.Length; i++)
@@ -133,36 +146,45 @@ namespace Sandbox
 
             tempArray[tempArray.Length - 1] = child;
 
-            _children = tempArray;
-
             child._parent = this;
+
+            _children = tempArray;
         }
 
-        public void RemoveChild(Transform2D child)
+        public bool RemoveChild(Transform2D child)
         {
-            Transform2D[] tempArray = new Transform2D[_children.Length - 1];
-            int counter = 0;
+            bool childRemoved = false;
 
-            for (int i = 0; i < _children.Length; i++)
+            // if no child
+            if (_children.Length == 0)
+            {
+                return false;
+            }
+
+            Transform2D[] tempArray = new Transform2D[_children.Length - 1];
+
+            int j = 0;
+
+                for (int i = 0; i < _children.Length; i++)
             {
                 if (_children[i] != child)
                 {
-                    tempArray[counter] = _children[i];
-                    counter++;
+                    tempArray[j] = _children[i];
+                    j++;
+                }
+                else
+                {
+                    childRemoved = true;
                 }
             }
 
-            child._parent = null;
-
-            _children = tempArray;
-        }
-
-        public void WriteChildren()
-        {
-            foreach (Transform2D child in _children)
+            if (childRemoved)
             {
-                Console.WriteLine(child);
+            _children = tempArray;
+            child._parent = null;
             }
+
+            return childRemoved;
         }
 
         public void UpdateTransforms()
