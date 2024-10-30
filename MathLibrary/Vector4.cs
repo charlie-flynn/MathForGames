@@ -21,6 +21,9 @@ namespace MathLibrary
         {
             get
             {
+                if (Magnitude == 0)
+                    return new Vector4(0, 0);
+
                 return this / Magnitude;
             }
         }
