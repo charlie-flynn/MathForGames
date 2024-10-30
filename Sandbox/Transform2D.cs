@@ -29,9 +29,7 @@ namespace Sandbox
 
             set
             {
-                // comment just in case
                 _localRotation = value;
-                // other comment just in case
                 _localRotationAngle = -(float)Math.Atan2(_localRotation.m01, _localRotation.m00);
 
                 UpdateTransforms();
@@ -137,17 +135,15 @@ namespace Sandbox
                 return;
             }
 
+            // create a temporary array to copy  everything over and also add the specificed child to
+            // then copy it over and set the child's parent to this transform
             Transform2D[] tempArray = new Transform2D[_children.Length + 1];
-
             for (int i = 0; i < _children.Length; i++)
             {
                 tempArray[i] = _children[i];
             }
-
             tempArray[tempArray.Length - 1] = child;
-
             child._parent = this;
-
             _children = tempArray;
         }
 
@@ -155,17 +151,19 @@ namespace Sandbox
         {
             bool childRemoved = false;
 
-            // if no child
+            // if there are no children to remove, don't do anything and leave
             if (_children.Length == 0)
             {
                 return false;
             }
 
+            // create a temporary array to copy everything over and remove the specified child from
+            // then copy it over to the children array if the child was successfully removed
             Transform2D[] tempArray = new Transform2D[_children.Length - 1];
 
             int j = 0;
 
-                for (int i = 0; i < _children.Length; i++)
+            for (int i = 0; i < _children.Length; i++)
             {
                 if (_children[i] != child)
                 {
@@ -191,19 +189,33 @@ namespace Sandbox
         {
             _localMatrix = _localTranslation * _localRotation * _localScale;
 
+
+            // parent-child relationships
+            // TO DO: fix weird numbers happening with parents
             if (_parent != null)
             {
-                _globalMatrix = _parent._globalMatrix * _localMatrix;
+                _globalMatrix = _parent._localTranslation * _localMatrix;
             }
             else
             {
                 _globalMatrix = _localMatrix;
             }
 
+            // update the transforms of every child
             foreach (Transform2D child in _children)
             {
                 child.UpdateTransforms();
             }
+        }
+        
+        public string GlobalMatrixToString()
+        {
+            return _globalMatrix.ToString();
+        }
+
+        public string LocalMatrixToString()
+        {
+            return _localMatrix.ToString();
         }
     }
 }

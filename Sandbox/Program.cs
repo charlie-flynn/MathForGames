@@ -21,14 +21,17 @@ namespace Sandbox
                 (Raylib.GetScreenHeight()) / 2 - (t1.LocalScale.y / 2));
 
             Vector2 offset = new Vector2(t1.LocalScale.x / 2, t1.LocalScale.y / 2);
+
             float moveSpeed = 200.0f;
             float rotateSpeed = 5.0f;
 
             Transform2D t2 = new Transform2D(a);
             t2.LocalScale = new Vector2(50, 50);
             t2.LocalPosition = new Vector2
-                ((Raylib.GetScreenWidth() / 2) - (t2.LocalScale.x / 2),
+                ((Raylib.GetScreenWidth() / 2 + 100) - (t2.LocalScale.x / 2),
                 (Raylib.GetScreenHeight()) / 2 - (t2.LocalScale.y / 2));
+
+            Vector2 offset2 = new Vector2(t2.LocalScale.x / 2, t2.LocalScale.y / 2);
 
             t1.AddChild(t2);
 
@@ -39,37 +42,48 @@ namespace Sandbox
                 Raylib.BeginDrawing();
                 Raylib.ClearBackground(Color.White);
 
+                if (Raylib.IsKeyDown(KeyboardKey.W) || Raylib.IsKeyDown(KeyboardKey.S))
+                {
                 t1.Translate(t1.Forward * (Raylib.IsKeyDown(KeyboardKey.W) - Raylib.IsKeyDown(KeyboardKey.S)) * moveSpeed * Raylib.GetFrameTime());
+                }
+                if (Raylib.IsKeyDown(KeyboardKey.A) || Raylib.IsKeyDown(KeyboardKey.D))
+                {
                 t1.Rotate((Raylib.IsKeyDown(KeyboardKey.D) - (Raylib.IsKeyDown(KeyboardKey.A) * 2)) * rotateSpeed * Raylib.GetFrameTime());
+                }
 
                 Rectangle rect = new Rectangle(t1.GlobalPosition + offset, t1.GlobalScale);
                 Rectangle rect2 = new Rectangle(t2.GlobalPosition + offset, t2.GlobalScale);
 
                 Raylib.DrawRectanglePro(rect, new Vector2(0, 0) + offset, -t1.GlobalRotationAngle * (180 / (float)Math.PI), Color.Pink);
-                Raylib.DrawRectanglePro(rect2, new Vector2(0, 0) + offset, -t1.GlobalRotationAngle * (180 / (float)Math.PI), Color.SkyBlue);
+                Raylib.DrawRectanglePro(rect2, new Vector2(0, 0) + offset2, -t2.GlobalRotationAngle * (180 / (float)Math.PI), Color.SkyBlue);
                 Raylib.DrawLineV(t1.GlobalPosition + offset, t1.GlobalPosition + offset + (t1.Forward * 100), Color.SkyBlue);
+                Raylib.DrawText(t1.GlobalMatrixToString(), 10, 20, 22, Color.Blue);
+                Raylib.DrawText(t2.GlobalMatrixToString(), 10, 80, 22, Color.Red);
+                Raylib.DrawText(t1.LocalMatrixToString(), 10, 160, 22, Color.Blue);
+                Raylib.DrawText(t2.LocalMatrixToString(), 10, 240, 22, Color.Red);
+
                 Raylib.EndDrawing();
             }
 
 
 
             #region OLD CODE
-            Raylib.InitWindow(800, 800, "MY COOL MATH :3");
+            //Raylib.InitWindow(800, 800, "MY COOL MATH :3");
             
-            Vector2 screenDimensions = new Vector2(Raylib.GetScreenWidth(), Raylib.GetScreenHeight());
+            //Vector2 screenDimensions = new Vector2(Raylib.GetScreenWidth(), Raylib.GetScreenHeight());
 
-            // player
-            Vector2 playerPosition = new Vector2(screenDimensions.x * 0.5f, screenDimensions.y * 0.75f);
-            Vector2 playerForward = new Vector2(0, 1).Normalized;
-            float playerRadius = 20;
-            float playerViewAngle = 90;
-            float playerViewDistance = 300;
-            float playerSpeed = 80;
+            //// player
+            //Vector2 playerPosition = new Vector2(screenDimensions.x * 0.5f, screenDimensions.y * 0.75f);
+            //Vector2 playerForward = new Vector2(0, 1).Normalized;
+            //float playerRadius = 20;
+            //float playerViewAngle = 90;
+            //float playerViewDistance = 300;
+            //float playerSpeed = 80;
 
-            // EVIL
-            Vector2 enemyPosition = new Vector2(screenDimensions.x * 0.5f, screenDimensions.y * 0.40f);
-            float enemyRadius = 30;
-            Color enemyColor = Color.Red;
+            //// EVIL
+            //Vector2 enemyPosition = new Vector2(screenDimensions.x * 0.5f, screenDimensions.y * 0.40f);
+            //float enemyRadius = 30;
+            //Color enemyColor = Color.Red;
 
 
 
