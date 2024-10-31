@@ -194,7 +194,8 @@ namespace Sandbox
             // TO DO: fix weird numbers happening with parents
             if (_parent != null)
             {
-                _globalMatrix = _parent._localTranslation * _localMatrix;
+                _globalMatrix = _parent._globalMatrix * _localMatrix;
+                
             }
             else
             {

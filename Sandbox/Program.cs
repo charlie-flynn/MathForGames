@@ -48,9 +48,14 @@ namespace Sandbox
                 }
                 if (Raylib.IsKeyDown(KeyboardKey.A) || Raylib.IsKeyDown(KeyboardKey.D))
                 {
-                t1.Rotate((Raylib.IsKeyDown(KeyboardKey.D) - (Raylib.IsKeyDown(KeyboardKey.A) * 2)) * rotateSpeed * Raylib.GetFrameTime());
+                    t1.Rotate((Raylib.IsKeyDown(KeyboardKey.D) - (Raylib.IsKeyDown(KeyboardKey.A) * 2)) * rotateSpeed * Raylib.GetFrameTime());
                 }
-
+                if (Raylib.IsKeyDown(KeyboardKey.Up) || Raylib.IsKeyDown(KeyboardKey.Down))
+                {
+                    t1.LocalScale += new Vector2(Raylib.IsKeyDown(KeyboardKey.Up) - Raylib.IsKeyDown(KeyboardKey.Down),
+                        Raylib.IsKeyDown(KeyboardKey.Up) - Raylib.IsKeyDown(KeyboardKey.Down));
+                }
+                
                 Rectangle rect = new Rectangle(t1.GlobalPosition + offset, t1.GlobalScale);
                 Rectangle rect2 = new Rectangle(t2.GlobalPosition + offset, t2.GlobalScale);
 
