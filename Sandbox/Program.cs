@@ -7,8 +7,6 @@ namespace Sandbox
     {
         static void Main(string[] args)
         {
-
-            // buncha test stuff
             Actor a = new Actor();
 
             Raylib.InitWindow(800, 480, "world");
@@ -29,12 +27,12 @@ namespace Sandbox
             t2.LocalScale = new Vector2(50, 50);
             t2.LocalPosition = new Vector2
                 ((Raylib.GetScreenWidth() / 2 + 100) - (t2.LocalScale.x / 2),
-                (Raylib.GetScreenHeight()) / 2 - (t2.LocalScale.y / 2));
+                (Raylib.GetScreenHeight() / 2) - (t2.LocalScale.y / 2));
 
             Vector2 offset2 = new Vector2(t2.LocalScale.x / 2, t2.LocalScale.y / 2);
 
             t1.AddChild(t2);
-
+            
 
 
             while (!Raylib.WindowShouldClose())
@@ -42,6 +40,7 @@ namespace Sandbox
                 Raylib.BeginDrawing();
                 Raylib.ClearBackground(Color.White);
 
+                // movement roating and scale
                 if (Raylib.IsKeyDown(KeyboardKey.W) || Raylib.IsKeyDown(KeyboardKey.S))
                 {
                 t1.Translate(t1.Forward * (Raylib.IsKeyDown(KeyboardKey.W) - Raylib.IsKeyDown(KeyboardKey.S)) * moveSpeed * Raylib.GetFrameTime());
@@ -56,12 +55,15 @@ namespace Sandbox
                         Raylib.IsKeyDown(KeyboardKey.Up) - Raylib.IsKeyDown(KeyboardKey.Down));
                 }
                 
+                // draw rectangles
                 Rectangle rect = new Rectangle(t1.GlobalPosition + offset, t1.GlobalScale);
                 Rectangle rect2 = new Rectangle(t2.GlobalPosition + offset, t2.GlobalScale);
 
                 Raylib.DrawRectanglePro(rect, new Vector2(0, 0) + offset, -t1.GlobalRotationAngle * (180 / (float)Math.PI), Color.Pink);
                 Raylib.DrawRectanglePro(rect2, new Vector2(0, 0) + offset2, -t2.GlobalRotationAngle * (180 / (float)Math.PI), Color.SkyBlue);
                 Raylib.DrawLineV(t1.GlobalPosition + offset, t1.GlobalPosition + offset + (t1.Forward * 100), Color.SkyBlue);
+
+                // draw the matrices because i must know what's wrong
                 Raylib.DrawText(t1.GlobalMatrixToString(), 10, 20, 22, Color.Blue);
                 Raylib.DrawText(t2.GlobalMatrixToString(), 10, 80, 22, Color.Red);
                 Raylib.DrawText(t1.LocalMatrixToString(), 10, 160, 22, Color.Blue);
