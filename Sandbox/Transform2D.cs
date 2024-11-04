@@ -191,8 +191,6 @@ namespace Sandbox
         {
             _localMatrix = _localTranslation * _localRotation * _localScale;
             
-            // parent-child relationships
-            // TO DO: fix weird numbers happening with parents
             if (_parent != null)
             {
                 _globalMatrix = _parent._globalMatrix * _localMatrix;

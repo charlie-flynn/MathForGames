@@ -13,7 +13,7 @@ namespace Sandbox
             Raylib.SetTargetFPS(60);
 
             Transform2D t1 = new Transform2D(a);
-            t1.LocalScale = new Vector2(1, 1);
+            t1.LocalScale = new Vector2(100, 100);
             t1.LocalPosition = new Vector2
                 ((Raylib.GetScreenWidth() / 2) - (t1.LocalScale.x / 2), 
                 (Raylib.GetScreenHeight() / 2) - (t1.LocalScale.y / 2));
@@ -24,10 +24,8 @@ namespace Sandbox
             float rotateSpeed = 5.0f;
 
             Transform2D t2 = new Transform2D(a);
-            t2.LocalScale = new Vector2(1, 1);
-            t2.LocalPosition = new Vector2
-                ((Raylib.GetScreenWidth() / 2 - 150) - (t2.LocalScale.x / 2),
-                (Raylib.GetScreenHeight() / 2 - 25) - (t2.LocalScale.y / 2));
+            t2.LocalScale = new Vector2(0.5f, 0.5f);
+            t2.LocalPosition = new Vector2(-2, -0.25f);
 
             t1.AddChild(t2);
 
@@ -53,14 +51,14 @@ namespace Sandbox
                 }
 
                 // draw rectangles
-                Vector2 offset = new Vector2((100 + t1.LocalScale.x) / 2, (100 + t1.LocalScale.y) / 2);
-                Vector2 offset2 = new Vector2((50 + t2.LocalScale.x) / 2, (50 + t2.LocalScale.y) / 2);
-                Rectangle rect = new Rectangle(t1.GlobalPosition + offset, new Vector2(100, 100) + t1.GlobalScale);
-                Rectangle rect2 = new Rectangle(t2.GlobalPosition + offset, new Vector2(50, 50) + t2.GlobalScale);
+                Vector2 offset = new Vector2(t1.LocalScale.x / 2, t1.LocalScale.y / 2);
+                Vector2 offset2 = new Vector2(t2.LocalScale.x / 2, t2.LocalScale.y / 2);
+                Rectangle rect = new Rectangle(t1.GlobalPosition + offset, t1.GlobalScale);
+                Rectangle rect2 = new Rectangle(t2.GlobalPosition + offset, t2.GlobalScale);
 
                 Raylib.DrawRectanglePro(rect, new Vector2(0, 0) + offset, -t1.GlobalRotationAngle * (180 / (float)Math.PI), Color.Pink);
                 Raylib.DrawRectanglePro(rect2, new Vector2(0, 0) + offset2, -t2.GlobalRotationAngle * (180 / (float)Math.PI), Color.SkyBlue);
-                Raylib.DrawLineV(t1.GlobalPosition + offset, t1.GlobalPosition + offset + (t1.Forward * (100 + t1.GlobalScale.x)), Color.SkyBlue);
+                Raylib.DrawLineV(t1.GlobalPosition + offset, t1.GlobalPosition + offset + (t1.Forward * t1.GlobalScale.x), Color.SkyBlue);
 
                 // draw the matrices because i must know what's wrong
                 Raylib.DrawText(t1.GlobalMatrixToString(), 10, 20, 22, Color.Blue);
