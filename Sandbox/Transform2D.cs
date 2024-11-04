@@ -147,6 +147,7 @@ namespace Sandbox
             tempArray[tempArray.Length - 1] = child;
             child._parent = this;
             _children = tempArray;
+            child.UpdateTransforms();
         }
 
         public bool RemoveChild(Transform2D child)
