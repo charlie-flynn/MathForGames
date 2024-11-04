@@ -103,6 +103,8 @@ namespace Sandbox
             get { return (float)Math.Atan2(_globalMatrix.m01, _globalMatrix.m00); }
         }
 
+        public Transform2D[] Children { get => _children; }
+
         // waogh thats a lotta variables up there !  good thing theres no more code !
         // hahaha. just kiddin. more code
 
@@ -188,13 +190,12 @@ namespace Sandbox
         public void UpdateTransforms()
         {
             _localMatrix = _localTranslation * _localRotation * _localScale;
-
             
             // parent-child relationships
             // TO DO: fix weird numbers happening with parents
             if (_parent != null)
             {
-                _globalMatrix = _localMatrix * _parent._globalMatrix;
+                _globalMatrix = _parent._globalMatrix * _localMatrix;
             }
             else
             {
@@ -208,8 +209,6 @@ namespace Sandbox
             }
         }
 
-        
-        
         public string GlobalMatrixToString()
         {
             return _globalMatrix.ToString();
