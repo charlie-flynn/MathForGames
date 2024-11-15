@@ -60,7 +60,7 @@ namespace Sandbox
                 Raylib.DrawRectanglePro(rect2, new Vector2(0, 0) + offset2, -t2.GlobalRotationAngle * (180 / (float)Math.PI), Color.SkyBlue);
                 Raylib.DrawLineV(t1.GlobalPosition + offset, t1.GlobalPosition + offset + (t1.Forward * t1.GlobalScale.x), Color.SkyBlue);
 
-                // draw the matrices because i must know what's wrong
+                // draw the matrices because i must know what's wrong (nothing is wrong :thumbsup:)
                 Raylib.DrawText(t1.GlobalMatrixToString(), 10, 20, 22, Color.Blue);
                 Raylib.DrawText(t2.GlobalMatrixToString(), 10, 80, 22, Color.Red);
                 Raylib.DrawText(t1.LocalMatrixToString(), 10, 160, 22, Color.Blue);

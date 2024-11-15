@@ -44,7 +44,7 @@ namespace MathLibrary
             }
         }
 
-        // override for pretending that this is an array with indices (beacuz it's awesome)
+        // property for pretending that this is an array with indices
         public float this[int i]
         {
             get
@@ -76,7 +76,6 @@ namespace MathLibrary
                     case 6: m20 = value; break;
                     case 7: m21 = value; break;
                     case 8: m22 = value; break;
-                    default: m22 = value; break;
                 }
             }
         }
@@ -117,12 +116,13 @@ namespace MathLibrary
         }
 
         // transpose the matrix
-        public void Transpose()
+        public Matrix3 Transpose()
         {
             this = new Matrix3(
                 m00, m10, m20,
                 m01, m11, m21,
                 m02, m12, m22);
+            return this;
         }
 
         // override for addition
