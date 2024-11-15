@@ -116,6 +116,15 @@ namespace MathLibrary
                 0, 0, 1);
         }
 
+        // transpose the matrix
+        public void Transpose()
+        {
+            this = new Matrix3(
+                m00, m10, m20,
+                m01, m11, m21,
+                m02, m12, m22);
+        }
+
         // override for addition
         public static Matrix3 operator +(Matrix3 a, Matrix3 b)
         {
