@@ -38,7 +38,7 @@ namespace Sandbox
                 // movement roating and scale
                 if (Raylib.IsKeyDown(KeyboardKey.W) || Raylib.IsKeyDown(KeyboardKey.S))
                 {
-                t1.Translate(t1.Forward * (Raylib.IsKeyDown(KeyboardKey.W) - Raylib.IsKeyDown(KeyboardKey.S)) * moveSpeed * Raylib.GetFrameTime());
+                    t1.Translate(t1.Forward * (Raylib.IsKeyDown(KeyboardKey.W) - Raylib.IsKeyDown(KeyboardKey.S)) * moveSpeed * Raylib.GetFrameTime());
                 }
                 if (Raylib.IsKeyDown(KeyboardKey.A) || Raylib.IsKeyDown(KeyboardKey.D))
                 {
