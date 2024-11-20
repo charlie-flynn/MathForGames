@@ -93,11 +93,11 @@ namespace Sandbox
             get { return new Vector2(_globalMatrix.m10, _globalMatrix.m11).Normalized; }
         }
 
+        // these two properties return the angle in radians!! not degrees!! make sure to convert to degrees when using raylib stuff or w/e
         public float LocalRotationAngle
         {
             get { return _localRotationAngle; }
         }
-
         public float GlobalRotationAngle
         {
             get { return (float)Math.Atan2(_globalMatrix.m01, _globalMatrix.m00); }
