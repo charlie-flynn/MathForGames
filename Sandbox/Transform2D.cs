@@ -23,7 +23,6 @@ namespace Sandbox
 
         private float _localRotationAngle;
 
-        // these three properties allow you to set the local rotation, position, and scale of the transform
         public Matrix3 LocalRotation
         {
             get { return _localRotation; }
@@ -36,6 +35,7 @@ namespace Sandbox
                 UpdateTransforms();
             }
         }
+
         public Vector2 LocalPosition
         {
             get { return new Vector2(_localTranslation.m02, _localTranslation.m12); }
@@ -48,6 +48,12 @@ namespace Sandbox
                 UpdateTransforms();
             }
         }
+
+        public Vector2 GlobalPosition
+        {
+            get { return new Vector2(_globalMatrix.m02, _globalMatrix.m12); }
+        }
+
         public Vector2 LocalScale
         {
             get { return new Vector2(_localScale.m00, _localScale.m11); }
@@ -60,12 +66,7 @@ namespace Sandbox
                 UpdateTransforms();
             }
         }
-        // lets you get the position in relation to the world
-        public Vector2 GlobalPosition
-        {
-            get { return new Vector2(_globalMatrix.m02, _globalMatrix.m12); }
-        }
-        // lets you get the scale in relation to the world
+
         public Vector2 GlobalScale
         {
             get
@@ -76,36 +77,37 @@ namespace Sandbox
                 return new Vector2(xAxis.Magnitude, yAxis.Magnitude);
             }
         }
-        // returns the owner of this transform
+
         public Actor Owner
         {
             get { return _owner; }
         }
-        // returns the direction this transform is facing
+
         public Vector2 Forward
         {
             get { return new Vector2(_globalMatrix.m00, _globalMatrix.m10).Normalized; }
         }
-        // returns the direction to the right of this transform
+
         public Vector2 Right
         {
             get { return new Vector2(_globalMatrix.m10, _globalMatrix.m11).Normalized; }
         }
-        // returns the local rotation in float form (in radians)
+
         public float LocalRotationAngle
         {
             get { return _localRotationAngle; }
         }
-        // returns the global rotation in float form (in radians)
+
         public float GlobalRotationAngle
         {
             get { return (float)Math.Atan2(_globalMatrix.m01, _globalMatrix.m00); }
         }
-        // these two return the parent and children of this transform
+
         public Transform2D Parent { get => _parent; }
         public Transform2D[] Children { get => _children; }
 
-        // you're now in the function and property dimension!
+        // waogh thats a lotta variables up there !  good thing theres no more code !
+        // hahaha. just kiddin. more code
 
         public Transform2D(Actor owner)
         {
@@ -113,17 +115,16 @@ namespace Sandbox
             _children = new Transform2D[0];
         }
 
-        // translates the transform in a direction
         public void Translate(Vector2 direction)
         {
             LocalPosition += direction;
         }
+
         public void Translate(float x, float y)
         {
             LocalPosition += new Vector2(x, y);
         }
 
-        // rotates the transform
         public void Rotate(float radians)
         {
             LocalRotation = Matrix3.CreateRotation(_localRotationAngle + radians);
@@ -190,9 +191,8 @@ namespace Sandbox
 
         public void UpdateTransforms()
         {
-            // update this transform's local and global matrices, as well as it's children's transforms
             _localMatrix = _localTranslation * _localRotation * _localScale;
-
+            
             if (_parent != null)
             {
                 _globalMatrix = _parent._globalMatrix * _localMatrix;
@@ -202,13 +202,13 @@ namespace Sandbox
                 _globalMatrix = _localMatrix;
             }
 
+            // update the transforms of every child
             foreach (Transform2D child in _children)
             {
                 child.UpdateTransforms();
             }
         }
 
-        // these two functions convert the global and local matrices to strings
         public string GlobalMatrixToString()
         {
             return _globalMatrix.ToString();
