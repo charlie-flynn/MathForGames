@@ -48,6 +48,8 @@ namespace Sandbox
                 {
                     t1.LocalScale += new Vector2(Raylib.IsKeyDown(KeyboardKey.Up) - Raylib.IsKeyDown(KeyboardKey.Down),
                         Raylib.IsKeyDown(KeyboardKey.Up) - Raylib.IsKeyDown(KeyboardKey.Down));
+                    if (t1.LocalScale.x < 5.0f)
+                        t1.LocalScale = new Vector2(5.0f, 5.0f);
                 }
 
                 // draw rectangles
