@@ -29,13 +29,4 @@
     </Reference>
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="BRUSHSCI.TTF">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="comic.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
