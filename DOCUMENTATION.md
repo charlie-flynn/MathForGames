@@ -188,7 +188,7 @@
 | +(Matrix3 a, Matrix3 b) | Adds all of the contents of the given matrices together.                     |
 | -(Matrix3 a, Matrix3 b) | Subtracts the contents of the matrix on the left by the matrix on the right. |
 | *(Matrix3 a, Matrix3 b) | Multiplies two matrices together.[^1]                                        |
-| *(Matrix3 a, Vector3 b) | Multiplies a matrix by a Vector3.                                            |
+| *(Matrix3 a, Vector3 b) | Multiplies a Matrix3 by a Vector3.                                            |
 
 ---
 
@@ -224,7 +224,7 @@
 | +(Matrix4 a, Matrix4 b) | Adds all of the contents of the given matrices together.                     |
 | -(Matrix4 a, Matrix4 b) | Subtracts the contents of the matrix on the left by the matrix on the right. |
 | *(Matrix4 a, Matrix4 b) | Multiplies two matrices together.                                            |
-| *(Matrix4 a, Vector3 b) | Multiplies a matrix by a Vector3.                                            |
+| *(Matrix4 a, Vector4 b) | Multiplies a Matrix4 by a Vector4.                                            |
 
  [^1]: look at how i did the multiplication code for the matrices i'm really proud of it &#931;:3
     ```c#
